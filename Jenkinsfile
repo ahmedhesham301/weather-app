@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                docker.build("ahmedhesham301/weatherapp")
+                script{
+                    docker.build("ahmedhesham301/weatherapp")
+                }
             }
         }
     }
