@@ -15,7 +15,7 @@ pipeline {
         stage('push image') {
             steps {
                 script {
-                    docker.withRegistry('', 'DOCKERHUB_CREDENTIALS') {
+                    docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
                         image.push("1.0")
                     }
                 }
