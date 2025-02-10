@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_CREDENTIALS = 'dockerhub-credentials'
+        DOCKERHUB_CREDENTIALS = 'dockerhub-credentials'
     }
 
     stages {
@@ -15,7 +15,7 @@ pipeline {
         stage('push image') {
             steps {
                 script {
-                    docker.withRegistry('', 'DOCKER_CREDENTIALS') {
+                    docker.withRegistry('', 'DOCKERHUB_CREDENTIALS') {
                         image.push("1.0")
                     }
                 }
