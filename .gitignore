@@ -1,2 +1,4 @@
-#igonre the file where the api key is saved
-#key.txt
+.vscode
+akey.pem
+dockerhub token.txt
+key.txt

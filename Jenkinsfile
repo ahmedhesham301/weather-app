@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_CREDENTIALS = 'dockerhub-credentials'
-        OPENWEATHER_API_KEY = 'openweather_api_key'
+        OPENWEATHER_API_KEY = credentials('openweather-api_key')
     }
 
     stages {
