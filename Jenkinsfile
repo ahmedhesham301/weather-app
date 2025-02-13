@@ -9,7 +9,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    image = docker.build("ahmedhesham301/weatherapp","--build-arg OPENWEATHER_API_KEY=${env.OPENWEATHER_API_KEY}")
+                    image = docker.build("ahmedhesham301/weatherapp","--build-arg OPENWEATHER_API_KEY=${env.OPENWEATHER_API_KEY} .")
                 }
             }
         }
