@@ -21,10 +21,10 @@ pipeline {
                 }
             }
         }
-        stage('Run ansible playbook'){
+        stage('Run ansible playbook')   {
             steps{
                 script{
-                    ansiblePlaybook credentialsId: 'akey.pem', inventory: 'inventory.yaml', playbook: 'playbook.yaml'
+                    ansiblePlaybook credentialsId: 'ssh-key', inventory: 'inventory.yaml', playbook: 'playbook.yaml'
                 }
             }
         }
