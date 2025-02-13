@@ -8,21 +8,20 @@ pipeline {
     stages {
         stage('Build Image') {
             steps {
-                // script {
-                //     image = docker.build("ahmedhesham301/weatherapp","--build-arg ")
-                // }
-                echo OPENWEATHER_API_KEY
+                script {
+                    image = docker.build("ahmedhesham301/weatherapp","--build-arg ")
+                }
             }
         }
-        // stage('push image') {
-        //     steps {
-        //         script {
-        //             docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
-        //                 image.push("1.0")
-        //             }
-        //         }
-        //     }
-        // }
+        stage('push image') {
+            steps {
+                script {
+                    docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
+                        image.push("1.0")
+                    }
+                }
+            }
+        }
         // stage('Run ansible playbook'){
         //     steps{
         //         script{
