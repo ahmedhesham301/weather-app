@@ -24,7 +24,7 @@ pipeline {
         stage('Run ansible playbook')   {
             steps{
                 script{
-                    ansiblePlaybook credentialsId: 'ssh-key', inventory: 'inventory.yaml', playbook: 'playbook.yaml'
+                    ansiblePlaybook vaultCredentialsId: 'ssh-key', inventory: 'inventory.yaml', playbook: 'playbook.yaml'
                 }
             }
         }
