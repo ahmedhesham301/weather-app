@@ -9,7 +9,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    image = docker.build("ahmedhesham301/weatherapp","--build-arg ")
+                    image = docker.build("ahmedhesham301/weatherapp")
                 }
             }
         }

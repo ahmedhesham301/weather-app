@@ -6,7 +6,8 @@ COPY app.py .
 COPY static static
 COPY templates templates
 COPY requirements.txt .
-COPY key.txt .
+
+ENV OPENWEATHER_API_KEY=$OPENWEATHER_API_KEY
 
 RUN pip install -r requirements.txt
 
