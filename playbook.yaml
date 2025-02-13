@@ -16,7 +16,7 @@
    - name: Log into DockerHub
      community.docker.docker_login:
       username: ahmedhesham301
-      password: "{{ lookup('file', 'dockerhub token.txt') }}"
+      password: "dckr_pat_p42eET8v8YjmNIWXKoc_b7cA27s"
    - name: Pull the image
      community.docker.docker_image_pull:
       name: ahmedhesham301/weatherapp:1.0
