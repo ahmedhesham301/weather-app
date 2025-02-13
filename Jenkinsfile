@@ -2,14 +2,13 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_CREDENTIALS = 'dockerhub-credentials'
-        OPENWEATHER_API_KEY = 'openweather-api-key'
     }
 
     stages {
         stage('Build Image') {
             steps {
                 script {
-                    image = docker.build("ahmedhesham301/weatherapp","--build-arg OPENWEATHER_API_KEY=${env.OPENWEATHER_API_KEY} .")
+                    image = docker.build("ahmedhesham301/weatherapp")
                 }
             }
         }
@@ -22,12 +21,12 @@ pipeline {
                 }
             }
         }
-        // stage('Run ansible playbook'){
-        //     steps{
-        //         script{
-        //             ansiblePlaybook credentialsId: 'akey.pem', inventory: 'inventory.yaml', playbook: 'playbook.yaml'
-        //         }
-        //     }
-        // }
+        stage('Run ansible playbook'){
+            steps{
+                script{
+                    ansiblePlaybook credentialsId: 'akey.pem', inventory: 'inventory.yaml', playbook: 'playbook.yaml'
+                }
+            }
+        }
     }
 }
