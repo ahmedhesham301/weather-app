@@ -34,8 +34,6 @@ A web application that retrieves and displays weather information for cities usi
 
 1. **Clone the Repository**:
     ```
-    bash
-    Copy
     git clone https://github.com/your-repository/weatherapp.git
     cd weatherapp
     ```
