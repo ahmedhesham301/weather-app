@@ -28,5 +28,13 @@ pipeline {
                 }
             }
         }
+        post{
+            failure {
+            mail bcc: '', body: 'pipeline succeed pipeline succeed ', cc: '', from: '', replyTo: '', subject: 'pipeline failed', to: 'ahmed.hesham.farag@gmail.com'
+            }
+            success {
+            mail bcc: '', body: 'ffffff ', cc: '', from: '', replyTo: '', subject: 'pipeline succeed', to: 'ahmed.hesham.farag@gmail.com'
+            }
+        }
     }
 }
