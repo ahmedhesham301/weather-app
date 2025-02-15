@@ -1,6 +1,7 @@
 # WeatherApp - Flask-based Weather Application
 
 A web application that retrieves and displays weather information for cities using the OpenWeatherMap API. It caches data locally in an SQLite database and provides a simple user interface to search, view, and manage weather data.
+![image](https://github.com/user-attachments/assets/b80091b4-850b-4a40-a6fe-fb584f15014b)
 
 ## Features
 
@@ -86,3 +87,6 @@ The playbook (`playbook.yaml`) performs the following on the target server:
     
 
 **Note**: The playbook assumes a `yum`-based system (e.g., CentOS). Adjust for `apt` if using Debian based system.
+![image](https://github.com/user-attachments/assets/59b122d7-3721-4a8b-8c97-fb30899272b0)
+![image](https://github.com/user-attachments/assets/cb3fd80a-837c-4f71-b51b-fea153837091)
+
