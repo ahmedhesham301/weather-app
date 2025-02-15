@@ -1,7 +1,7 @@
 # WeatherApp - Flask-based Weather Application
 
 A web application that retrieves and displays weather information for cities using the OpenWeatherMap API. It caches data locally in an SQLite database and provides a simple user interface to search, view, and manage weather data.
-![image](https://github.com/user-attachments/assets/b80091b4-850b-4a40-a6fe-fb584f15014b)
+![pipeline diagram drawio (1)](https://github.com/user-attachments/assets/6b7ecfd8-645e-49ca-b46a-f1b54c88ee8c)
 
 ## Features
 
