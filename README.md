@@ -7,7 +7,6 @@ A web application that retrieves and displays weather information for cities usi
 
 - **Real-time Weather Data**: Fetch current weather data for any city worldwide.
     
-- **Caching**: Stores weather data locally to reduce API calls and improve response times.
     
 - **Last City Memory**: Remembers the last searched city for convenience.
     
@@ -15,7 +14,7 @@ A web application that retrieves and displays weather information for cities usi
     
 - **Dockerized**: Easily deployable using Docker containers.
     
-- **CI/CD Pipeline**: Automated build, push, and deployment using Jenkins and Ansible.
+- **CI/CD Pipeline**: Automated build, push using Jenkins and Ansible.
     
 
 ## Prerequisites
