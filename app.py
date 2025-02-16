@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # add your api key in key.txt
 
-API_KEY = "576fa0cd8ddfdffd65b2ad2d0c041630"
+API_KEY = ""
 
 # SQLite database path
 DATABASE = "weather.db"
