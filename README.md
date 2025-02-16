@@ -86,7 +86,10 @@ The playbook (`playbook.yaml`) performs the following on the target server:
 4. Runs the container on port 5000.
     
 
-**Note**: The playbook assumes a `yum`-based system (e.g., CentOS). Adjust for `apt` if using Debian based system.
+**Note**: his playbook is compatible only with AWS Linux. For other distributions, you must add the Docker repository as explained here: [Install docker](https://docs.docker.com/engine/install/)
+![image](https://github.com/user-attachments/assets/962bf001-b694-474f-b5ad-ed586f13f251)
+
 ![image](https://github.com/user-attachments/assets/59b122d7-3721-4a8b-8c97-fb30899272b0)
+
 ![image](https://github.com/user-attachments/assets/cb3fd80a-837c-4f71-b51b-fea153837091)
 
