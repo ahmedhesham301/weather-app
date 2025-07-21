@@ -38,12 +38,12 @@ pipeline {
         }
         
     }
-    post{
-        // failure {
-        // mail bcc: '', body: 'pipeline failed', cc: '', from: '', replyTo: '', subject: 'pipeline failed', to: 'ahmed.hesham.farag@gmail.com'
-        // }
-        // success {
-        // mail bcc: '', body: 'pipeline succeed', cc: '', from: '', replyTo: '', subject: 'pipeline succeed', to: 'ahmed.hesham.farag@gmail.com'
-        // }
-    }
+    // post{
+    //     failure {
+    //     mail bcc: '', body: 'pipeline failed', cc: '', from: '', replyTo: '', subject: 'pipeline failed', to: 'ahmed.hesham.farag@gmail.com'
+    //     }
+    //     success {
+    //     mail bcc: '', body: 'pipeline succeed', cc: '', from: '', replyTo: '', subject: 'pipeline succeed', to: 'ahmed.hesham.farag@gmail.com'
+    //     }
+    // }
 }
