@@ -22,6 +22,13 @@ pipeline {
             }
         }
         stage("Terraform"){
+            environment {
+                aws-credentials = credentials('aws-credentials')
+            }
+            script {
+                env.AWS_ACCESS_KEY_ID=${aws-credentials_USR}
+                env.AWS_SECRET_ACCESS_KEY=${aws-credentials_PSW}
+            }
             steps{
                 sh'''
                     terraform -chdir=./infra init
