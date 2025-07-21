@@ -23,17 +23,18 @@ pipeline {
         }
         stage("Terraform"){
             environment {
-                aws-credentials = credentials('aws-credentials')
-            }
-            script {
-                env.AWS_ACCESS_KEY_ID=${aws-credentials_USR}
-                env.AWS_SECRET_ACCESS_KEY=${aws-credentials_PSW}
+                aws_credentials = credentials('aws-credentials')
             }
             steps{
-                sh'''
-                    terraform -chdir=./infra init
-                    terraform -chdir=./infra apply -auto-approve   
-                '''
+                withEnv([
+                    "AWS_ACCESS_KEY_ID=${aws_credentials_USR}",
+                    "AWS_SECRET_ACCESS_KEY=${aws_credentials_PSW}"
+                ]){
+                    sh'''
+                        terraform -chdir=./infra init
+                        terraform -chdir=./infra apply -auto-approve   
+                    '''
+                }
             }
         }
         stage('Run ansible playbook')   {
