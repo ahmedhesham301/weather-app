@@ -6,9 +6,8 @@ import os
 app = Flask(__name__)
 
 
-# add your api key in key.txt
 
-API_KEY = ""
+API_KEY = os.getenv("open_weather_api_key")
 
 # SQLite database path
 DATABASE = "weather.db"
@@ -84,7 +83,7 @@ def get_weather():
         })
 
     # Fetch data from OpenWeatherMap API if not cached
-    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
     response = requests.get(url)
 
     if response.status_code != 200:
