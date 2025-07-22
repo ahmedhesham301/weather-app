@@ -47,7 +47,7 @@ pipeline {
                             ansiblePlaybook(
                                 credentialsId: 'aws-ssh-key',
                                 inventory: 'ansible/inventory.py',
-                                playbook: 'ansible/playbook.yaml'
+                                playbook: 'ansible/playbook.yaml',
                                 extraVars: [
                                   dockerhub_psw: "$DOCKERHUB_PSW"
                                 ]
