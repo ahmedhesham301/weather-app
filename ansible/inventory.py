@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import json
 
-with open("output.json") as f:
+with open("ansible/ips.json") as f:
     hosts = json.load(f)
 
 hosts_dict = {"all": {"hosts": {}, "children": {"webservers": {"hosts": {}}}}}
