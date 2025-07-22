@@ -16,7 +16,7 @@
    - name: Log into DockerHub
      community.docker.docker_login:
       username: ahmedhesham301
-      password: ""
+      password: "{{ lookup('env', 'dockerhub_psw') }}"
    - name: Pull the image
      community.docker.docker_image_pull:
       name: ahmedhesham301/weatherapp:1.0
