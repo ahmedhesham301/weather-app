@@ -31,8 +31,8 @@ pipeline {
                     "AWS_SECRET_ACCESS_KEY=${aws_credentials_PSW}"
                 ]){
                     sh'''
-                        terraform -chdir=./infra init
-                        terraform -chdir=./infra apply -auto-approve   
+                        terraform -chdir=./terraform init
+                        terraform -chdir=./terraform apply -auto-approve   
                     '''
                 }
             }
