@@ -13,6 +13,9 @@
       name: docker
       state: started
       enabled: true
+   - name: Debug password (for testing only!)
+     ansible.builtin.debug:
+      msg: "The password is {{ lookup('env', 'dockerhub_psw') }}"
    - name: Log into DockerHub
      community.docker.docker_login:
       username: ahmedhesham301
