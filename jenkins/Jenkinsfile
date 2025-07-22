@@ -42,17 +42,16 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS, usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PSW')]) {
-                        withEnv(["dockerhub_psw=$DOCKERHUB_PSW"]) {
-                            sh 'chmod +x ansible/inventory.py'
-                            ansiblePlaybook(
-                                credentialsId: 'aws-ssh-key',
-                                inventory: 'ansible/inventory.py',
-                                playbook: 'ansible/playbook.yaml',
-                                extraVars: [
-                                  dockerhub_psw: "$DOCKERHUB_PSW"
-                                ]
-                            )
-                        }
+                        
+                        sh 'chmod +x ansible/inventory.py'
+                        ansiblePlaybook(
+                            credentialsId: 'aws-ssh-key',
+                            inventory: 'ansible/inventory.py',
+                            playbook: 'ansible/playbook.yaml',
+                            extraVars: [
+                                dockerhub_psw: "$DOCKERHUB_PSW"
+                            ]
+                        )
                     }
                 }
             }
