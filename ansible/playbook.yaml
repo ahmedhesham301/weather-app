@@ -28,3 +28,5 @@
       ports:
        - 5000:5000
       detach: true
+      env:
+       open_weather_api_key: "{{ open_weather_api_key }}"

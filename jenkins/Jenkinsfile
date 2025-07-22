@@ -41,7 +41,10 @@ pipeline {
         stage('Run ansible playbook') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS, usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PSW')]) {
+                    withCredentials([
+                        usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS, usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PSW'),
+                        string(credentialsId: open_weather_api_key , variable: "open_weather_api_key")
+                        ]) {
                         
                         sh 'chmod +x ansible/inventory.py'
                         ansiblePlaybook(
@@ -49,7 +52,8 @@ pipeline {
                             inventory: 'ansible/inventory.py',
                             playbook: 'ansible/playbook.yaml',
                             extraVars: [
-                                dockerhub_psw: "$DOCKERHUB_PSW"
+                                dockerhub_psw: "$DOCKERHUB_PSW",
+                                open_weather_api_key: "$open_weather_api_key"
                             ]
                         )
                     }
