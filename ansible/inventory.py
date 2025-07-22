@@ -1,22 +1,12 @@
 #!/usr/bin/env python3
 import json
-import sys
 
 with open("ansible/ips.json") as f:
-    ip_data = json.load(f)
+    hosts = json.load(f)
 
-hosts = ip_data["ips"]["value"]
+hosts_dict = {"all": {"hosts": {}, "children": {"webservers": {"hosts": {}}}}}
 
-inventory = {
-    "all": {"children": {"webservers": {"hosts": list(hosts.keys())}}},
-    "_meta": {"hostvars": {name: {"ansible_host": ip} for name, ip in hosts.items()}},
-}
-
-if len(sys.argv) == 2 and sys.argv[1] == "--list":
-    print(json.dumps(inventory, indent=2))
-elif len(sys.argv) == 3 and sys.argv[1] == "--host":
-    hostname = sys.argv[2]
-    print(json.dumps(inventory["_meta"]["hostvars"].get(hostname, {}), indent=2))
-else:
-    print("Usage: --list or --host <hostname>", file=sys.stderr)
-    sys.exit(1)
+for name,ip in hosts["ips"]["value"].items():
+    hosts_dict["all"]["hosts"][name] = {"ansible_host": ip}
+    hosts_dict["all"]["children"]["webservers"]["hosts"][name] = None
+print(json.dumps(hosts_dict, indent=2))
