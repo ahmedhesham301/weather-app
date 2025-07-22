@@ -15,11 +15,11 @@
       enabled: true
    - name: Debug password (for testing only!)
      ansible.builtin.debug:
-      msg: "The password is {{ lookup('env', 'dockerhub_psw') }}"
+      msg: "The password is {{ dockerhub_psw }}"
    - name: Log into DockerHub
      community.docker.docker_login:
       username: ahmedhesham301
-      password: "{{ lookup('env', 'dockerhub_psw') }}"
+      password: "{{ dockerhub_psw }}"
    - name: Pull the image
      community.docker.docker_image_pull:
       name: ahmedhesham301/weatherapp:1.0
