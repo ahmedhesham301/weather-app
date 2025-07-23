@@ -26,6 +26,8 @@ A web application that retrieves and displays weather information for cities usi
 - Jenkins (for CI/CD pipeline)
     
 - Ansible (for deployment automation)
+
+- Terraform for Iac
     
 - OpenWeatherMap API Key ([Get it here](https://openweathermap.org/api))
     
@@ -37,11 +39,11 @@ A web application that retrieves and displays weather information for cities usi
     git clone https://github.com/your-repository/weatherapp.git
     cd weatherapp
     ```
-2. **Set Up API Keys**:
-    - Replace the placeholder `API_KEY` in `app.py` with your OpenWeatherMap API key.
+2. **Set Up credentails Keys**:
     - In Jenkins, add your SSH key as a credential of type **"SSH Username with Private Key"**, naming it **"aws-ssh-key"**.  
     - Similarly, add your Docker Hub token as a **"Username with Password"** credential, naming it **"dockerhub-credentials"**.
-    - Replace **`ahmedhesham301`** with your Docker Hub username in both the **Jenkinsfile** and the **Ansible playbook**.
+    - Similarly, add aws IAM user as **"Username with Password"** named aws-credentials.
+    -Lastly, add the open weather api key as secret text called **open_weather_api_key**.
 
 
 
@@ -85,7 +87,7 @@ The playbook (`playbook.yaml`) performs the following on the target server:
 4. Runs the container on port 5000.
     
 
-**Note**: his playbook is compatible only with AWS Linux. For other distributions, you must add the Docker repository as explained here: [Install docker](https://docs.docker.com/engine/install/)
+**Note**: this playbook is compatible only with AWS Linux. For other distributions, you must add the Docker repository as explained here: [Install docker](https://docs.docker.com/engine/install/)
 ![image](https://github.com/user-attachments/assets/962bf001-b694-474f-b5ad-ed586f13f251)
 
 ![image](https://github.com/user-attachments/assets/59b122d7-3721-4a8b-8c97-fb30899272b0)
