@@ -1,96 +1,114 @@
-# WeatherApp - Flask-based Weather Application
+# WeatherApp 🌦️
 
-A web application that retrieves and displays weather information for cities using the OpenWeatherMap API. It caches data locally in an SQLite database and provides a simple user interface to search, view, and manage weather data.
-![pipeline diagram drawio (1)](https://github.com/user-attachments/assets/6b7ecfd8-645e-49ca-b46a-f1b54c88ee8c)
+A Flask-based web application to fetch, display, and manage weather data for cities worldwide using the OpenWeatherMap API. WeatherApp features local caching with SQLite, a user-friendly interface, and automated deployment via Docker, Jenkins, Ansible, and Terraform.
 
-## Features
+---
 
-- **Real-time Weather Data**: Fetch current weather data for any city worldwide.
-    
-    
-- **Last City Memory**: Remembers the last searched city for convenience.
-    
-- **History Management**: View and delete previously searched cities.
-    
-- **Dockerized**: Easily deployable using Docker containers.
-    
-- **CI/CD Pipeline**: Automated build, push using Jenkins and Ansible.
-    
+## 🚀 Features
 
-## Prerequisites
+- **Real-Time Weather**: Search any city and get up-to-date weather info.
+- **Search History**: View and manage previously searched cities.
+- **Last Search Memory**: Automatically remembers your last searched city.
+- **Delete History**: Remove cities from your search history.
+- **Dockerized**: Easy containerized deployment.
+- **CI/CD Pipeline**: Automated build, push, and deployment using Jenkins and Ansible.
+- **Infrastructure as Code**: Provision AWS resources with Terraform.
+- **Environment Variables**: Secure API key management via environment variables.
 
-- Python
-    
-- Docker and Docker Hub account
-    
-- Jenkins (for CI/CD pipeline)
-    
-- Ansible (for deployment automation)
+---
 
-- Terraform for Iac
-    
-- OpenWeatherMap API Key ([Get it here](https://openweathermap.org/api))
-    
+## 🛠️ Prerequisites
 
-## Installation
+- Python 3.x
+- Docker & Docker Hub account
+- Jenkins (for CI/CD)
+- Ansible (for deployment)
+- Terraform (for AWS provisioning)
+- OpenWeatherMap API Key ([Get yours here](https://openweathermap.org/api))
+- AWS Account (for EC2 provisioning)
+- S3 Bucket for Terraform state (see `terraform/backend.tf`)
 
-1. **Clone the Repository**:
-    ```
-    git clone https://github.com/your-repository/weatherapp.git
-    cd weatherapp
-    ```
-2. **Set Up credentails Keys**:
-    - In Jenkins, add your SSH key as a credential of type **"SSH Username with Private Key"**, naming it **"aws-ssh-key"**.  
-    - Similarly, add your Docker Hub token as a **"Username with Password"** credential, naming it **"dockerhub-credentials"**.
-    - Similarly, add aws IAM user as **"Username with Password"** named aws-credentials.
-    -Lastly, add the open weather api key as secret text called **open_weather_api_key**.
+---
 
+## ⚡ Quick Start
 
+### 1. Clone the Repository
 
+```bash
+git clone https://github.com/your-repository/weatherapp.git
+cd weatherapp
+```
 
-## Usage
+### 2. Set Up Credentials
 
-1. **Search for a City**:
-    
-    - Enter a city name in the search bar (e.g., "London").
-        
-    - View temperature, weather description, and icon.
-        
-2. **View Search History**:
-    
-    - All previously searched cities are listed below the search bar.
-        
-3. **Delete a City**:
-    
-    - Click the "Delete" button next to any city to remove it from the history.
-        
+- **Jenkins**:
+  - Add your SSH key as **"aws-ssh-key"** (type: SSH Username with Private Key).
+  - Add your Docker Hub token as **"dockerhub-credentials"** (type: Username with Password).
+  - Add your AWS IAM user as **"aws-credentials"** (type: Username with Password).
+  - Add your OpenWeatherMap API key as secret text called **open_weather_api_key**.
 
-## Deployment
+### 3. Configure AWS & Terraform
+
+- Update the AMI ID in `terraform/ec2.tf` if needed for your region.
+- Ensure your S3 bucket exists and matches the name in `terraform/backend.tf`.
+- Set your AWS region in `terraform/providers.tf`.
+---
+
+## 🖥️ Usage
+
+1. **Search for a City**:  
+   Enter a city name (e.g., "London") to view its temperature, weather description, and icon.
+
+2. **View Search History**:  
+   Previously searched cities are listed below the search bar.
+
+3. **Delete a City**:  
+   Click "Delete" next to any city to remove it from history.
+
+---
+
+## 🏗️ Deployment
 
 ### CI/CD Pipeline (Jenkins)
 
-- Run the Jenkins pipeline to:
-    - Build and push the Docker image to Docker Hub.        
-    - Deploy the app using Ansible.
-            
+- **Stages**:
+  1. Build Docker image.
+  2. Push image to Docker Hub.
+  3. Provision AWS infrastructure with Terraform.
+  4. Deploy app using Ansible.
 
 ### Ansible Playbook
 
-The playbook (`playbook.yaml`) performs the following on the target server:
+- Installs and starts Docker.
+- Logs into Docker Hub.
+- Pulls the Docker image.
+- Runs the container on port 5000 with your API key.
 
-1. Installs and starts Docker.
-    
-2. Logs into Docker Hub.
-    
-3. Pulls the Docker image.
-    
-4. Runs the container on port 5000.
-    
+> **Note:** The playbook is compatible with AWS Linux. For other distributions, add the Docker repository as described [here](https://docs.docker.com/engine/install/).
 
-**Note**: this playbook is compatible only with AWS Linux. For other distributions, you must add the Docker repository as explained here: [Install docker](https://docs.docker.com/engine/install/)
-![image](https://github.com/user-attachments/assets/962bf001-b694-474f-b5ad-ed586f13f251)
+---
 
-![image](https://github.com/user-attachments/assets/59b122d7-3721-4a8b-8c97-fb30899272b0)
+## 🗂️ Project Structure
 
-![image](https://github.com/user-attachments/assets/cb3fd80a-837c-4f71-b51b-fea153837091)
+```
+weather-app/
+├── app/                # Flask application code
+├── ansible/            # Ansible playbook & inventory
+├── docker/             # Dockerfile
+├── jenkins/            # Jenkins pipeline
+├── terraform/          # Terraform configs for AWS
+├── requirements.txt    # Python dependencies
+└── README.md           # This file
+```
+---
 
+## 📸 Screenshots
+
+![Pipeline Diagram](https://github.com/user-attachments/assets/6b7ecfd8-645e-49ca-b46a-f1b54c88ee8c)
+![Jenkins Pipeline](https://github.com/user-attachments/assets/962bf001-b694-474f-b5ad-ed586f13f251)
+![app](https://github.com/user-attachments/assets/59b122d7-3721-4a8b-8c97-fb30899272b0)
+![app](https://github.com/user-attachments/assets/cb3fd80a-837c-4f71-b51b-fea153837091)
+
+```bash
+git clone https://github.com/your-repository/weatherapp.git
+cd weatherapp
