@@ -53,6 +53,7 @@ cd weatherapp
 - Update the AMI ID in `terraform/ec2.tf` if needed for your region.
 - Ensure your S3 bucket exists and matches the name in `terraform/backend.tf`.
 - Set your AWS region in `terraform/providers.tf`.
+
 ---
 
 ## 🖥️ Usage
@@ -85,13 +86,13 @@ cd weatherapp
 - Pulls the Docker image.
 - Runs the container on port 5000 with your API key.
 
-> **Note:** The playbook is compatible with AWS Linux. For other distributions, add the Docker repository as described [here](https://docs.docker.com/engine/install/).
+> **Note:** The playbook is compatible with AWS Linux. For other distributions, add the Docker repository as described [Install Docker Engine.](https://docs.docker.com/engine/install/).
 
 ---
 
 ## 🗂️ Project Structure
 
-```
+```text
 weather-app/
 ├── app/                # Flask application code
 ├── ansible/            # Ansible playbook & inventory
@@ -101,6 +102,7 @@ weather-app/
 ├── requirements.txt    # Python dependencies
 └── README.md           # This file
 ```
+
 ---
 
 ## 📸 Screenshots
