@@ -1,5 +1,5 @@
 resource "aws_security_group" "webserver" {
-  vpc_id = aws_vpc.webserver.id
+  vpc_id = aws_vpc.main.id
 }
 
 resource "aws_security_group_rule" "allow_http" {

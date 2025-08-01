@@ -2,7 +2,7 @@ resource "aws_lb" "main" {
   name               = "main-lb-tf"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.main.id]
+  security_groups    = [aws_security_group.webserver.id]
   subnets = [
     for subnet in values(aws_subnet.public) : subnet.id
   ]
