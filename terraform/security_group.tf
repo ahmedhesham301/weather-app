@@ -1,5 +1,5 @@
-resource "aws_security_group" "main" {
-  vpc_id = aws_vpc.main.id
+resource "aws_security_group" "webserver" {
+  vpc_id = aws_vpc.webserver.id
 }
 
 resource "aws_security_group_rule" "allow_http" {
@@ -8,7 +8,7 @@ resource "aws_security_group_rule" "allow_http" {
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   type              = "ingress"
-  security_group_id = aws_security_group.main.id
+  security_group_id = aws_security_group.webserver.id
 }
 
 resource "aws_security_group_rule" "allow_ssh" {
@@ -17,7 +17,7 @@ resource "aws_security_group_rule" "allow_ssh" {
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   type              = "ingress"
-  security_group_id = aws_security_group.main.id
+  security_group_id = aws_security_group.webserver.id
 }
 
 resource "aws_security_group_rule" "allow_egress" {
@@ -26,5 +26,14 @@ resource "aws_security_group_rule" "allow_egress" {
   protocol          = "all"
   cidr_blocks       = ["0.0.0.0/0"]
   type              = "egress"
-  security_group_id = aws_security_group.main.id
+  security_group_id = aws_security_group.webserver.id
+}
+
+resource "aws_security_group_rule" "lb" {
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  type              = "ingress"
+  security_group_id = aws_security_group.webserver.id
 }
