@@ -5,6 +5,7 @@ output "ips" {
 output "bastion_ip" {
   value = aws_instance.bastion.public_ip
 }
-# output "lb_ip" {
-#   value = aws_lb.main.dns_name
-# }
+
+output "lb_ip" {
+  value = aws_lb.main.dns_name
+}
