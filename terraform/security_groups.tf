@@ -2,7 +2,28 @@ resource "aws_security_group" "webserver" {
   vpc_id = aws_vpc.main.id
 }
 
-resource "aws_security_group_rule" "allow_http" {
+resource "aws_security_group" "lb" {
+  vpc_id = aws_vpc.main.id
+}
+
+resource "aws_security_group" "bastion" {
+  vpc_id = aws_vpc.main.id
+}
+
+resource "aws_security_group_rule" "allow_egress" {
+  for_each = {
+    webserver = aws_security_group.webserver,
+    bastion   = aws_security_group.bastion
+  }
+  from_port         = 0
+  to_port           = 0
+  protocol          = "all"
+  cidr_blocks       = ["0.0.0.0/0"]
+  type              = "egress"
+  security_group_id = each.value.id
+}
+
+resource "aws_security_group_rule" "allow_5000" {
   from_port         = 5000
   to_port           = 5000
   protocol          = "tcp"
@@ -11,22 +32,14 @@ resource "aws_security_group_rule" "allow_http" {
   security_group_id = aws_security_group.webserver.id
 }
 
-resource "aws_security_group_rule" "allow_ssh" {
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  type              = "ingress"
-  security_group_id = aws_security_group.webserver.id
-}
+resource "aws_security_group_rule" "allow_ssh_from_bastion" {
 
-resource "aws_security_group_rule" "allow_egress" {
-  from_port         = 0
-  to_port           = 0
-  protocol          = "all"
-  cidr_blocks       = ["0.0.0.0/0"]
-  type              = "egress"
-  security_group_id = aws_security_group.webserver.id
+  from_port                = 22
+  to_port                  = 22
+  protocol                 = "tcp"
+  type                     = "ingress"
+  security_group_id        = aws_security_group.webserver.id
+  source_security_group_id = aws_security_group.bastion.id
 }
 
 resource "aws_security_group_rule" "lb" {
@@ -35,5 +48,15 @@ resource "aws_security_group_rule" "lb" {
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   type              = "ingress"
-  security_group_id = aws_security_group.webserver.id
+  security_group_id = aws_security_group.lb.id
+}
+
+resource "aws_security_group_rule" "allow_ssh_to_bastion" {
+
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  type              = "ingress"
+  security_group_id = aws_security_group.bastion.id
 }
