@@ -11,7 +11,7 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 }
 
-resource "aws_subnet" "public" {
+resource "aws_subnet" "private" {
   for_each = {
     for i, az in data.aws_availability_zones.available.names :
     az => i
@@ -22,7 +22,7 @@ resource "aws_subnet" "public" {
   availability_zone       = each.key
   map_public_ip_on_launch = true
   tags = {
-    Name = "public-${each.key}"
+    Name = "private-${each.key}"
   }
 }
 
@@ -36,7 +36,7 @@ resource "aws_route_table" "rt" {
 }
 
 resource "aws_route_table_association" "public" {
-  for_each       = aws_subnet.public
+  for_each       = aws_subnet.private
   subnet_id      = each.value.id
   route_table_id = aws_route_table.rt.id
 }
