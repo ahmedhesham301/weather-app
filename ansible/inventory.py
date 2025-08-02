@@ -17,10 +17,10 @@ hosts_dict = {
         {
            "children": 
             [
-                "webservers"
+                "servers"
             ]
         },
-        "webservers": 
+        "servers": 
         {
             "hosts":
             [
@@ -30,9 +30,9 @@ hosts_dict = {
         
 }
 
-for name,ip in hosts["ips"]["value"].items():
+for name,ip in hosts.items():
     hosts_dict["_meta"]["hostvars"][name] = {"ansible_host": ip}
-    hosts_dict["webservers"]["hosts"].append(name)
+    hosts_dict["servers"]["hosts"].append(name)
 
 
 if len(sys.argv) == 2 and sys.argv[1] == "--list":
