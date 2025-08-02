@@ -1,7 +1,7 @@
 ---
 
 - name: Setup webservers
-  hosts: webservers
+  hosts: all
   become: true
   tasks:
    - name: Install docker
