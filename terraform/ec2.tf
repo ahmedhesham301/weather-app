@@ -15,7 +15,7 @@ resource "aws_instance" "webserver" {
 }
 
 resource "aws_instance" "bastion" {
-  ami                    = "ami-08af46d598e10731e"
+  ami                    = "ami-09c6c60df90f53603"
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public[local.azs[0]].id
   vpc_security_group_ids = [aws_security_group.bastion.id]
