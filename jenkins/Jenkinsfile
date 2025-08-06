@@ -44,7 +44,7 @@ pipeline {
                     withCredentials([
                         usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS, usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PSW'),
                         string(credentialsId: 'open_weather_api_key' , variable: 'open_weather_api_key'),
-                        sshUserPrivateKe(keyFileVariable:"sshKey", credentialsId:"aws-ssh-key")
+                        sshUserPrivateKey(keyFileVariable:"sshKey", credentialsId:"aws-ssh-key")
                         ]) {
                         
                         sh """
