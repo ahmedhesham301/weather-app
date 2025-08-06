@@ -43,19 +43,15 @@ pipeline {
                 script {
                     withCredentials([
                         usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS, usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PSW'),
-                        string(credentialsId: 'open_weather_api_key' , variable: 'open_weather_api_key')
+                        string(credentialsId: 'open_weather_api_key' , variable: 'open_weather_api_key'),
+                        sshUserPrivateKe(keyFileVariable:"sshKey", credentialsId:"aws-ssh-key")
                         ]) {
                         
-                        sh 'chmod +x ansible/inventory.py'
-                        ansiblePlaybook(
-                            credentialsId: 'aws-ssh-key',
-                            inventory: 'ansible/inventory.py',
-                            playbook: 'ansible/webservers.yaml',
-                            extraVars: [
-                                dockerhub_psw: "$DOCKERHUB_PSW",
-                                open_weather_api_key: "$open_weather_api_key"
-                            ]
-                        )
+                        sh """
+                        chmod +x ansible/inventory.py
+                        ansible-playbook -i ansible/inventory.py ansible/webservers.yaml \\
+                        --extra-vars 'dockerhub_psw=$DOCKERHUB_PSW open_weather_api_key=$open_weather_api_key'
+                        """
                     }
                 }
             }
