@@ -4,7 +4,7 @@ resource "aws_lb" "main" {
   load_balancer_type = "application"
   security_groups    = [aws_security_group.lb.id]
   subnets = [
-    for subnet in values(aws_subnet.private) : subnet.id
+    for subnet in values(aws_subnet.public) : subnet.id
   ]
 }
 resource "aws_lb_target_group" "main" {

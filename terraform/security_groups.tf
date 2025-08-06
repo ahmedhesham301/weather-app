@@ -60,3 +60,12 @@ resource "aws_security_group_rule" "allow_5000_from_lb" {
   security_group_id        = aws_security_group.webserver.id
   source_security_group_id = aws_security_group.lb.id
 }
+
+resource "aws_security_group_rule" "allow_lb_to_app" {
+  from_port                = 5000
+  to_port                  = 5000
+  protocol                 = "tcp"
+  type                     = "egress"
+  security_group_id        = aws_security_group.lb.id
+  source_security_group_id = aws_security_group.webserver.id
+}
