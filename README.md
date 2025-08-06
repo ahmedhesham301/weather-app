@@ -2,7 +2,8 @@
 
 A Flask-based web application to fetch, display, and manage weather data for cities worldwide using the OpenWeatherMap API. WeatherApp features local caching with SQLite, a user-friendly interface, and automated deployment via Docker, Jenkins, Ansible, and Terraform.
 
-<img width="786" height="586" alt="Untitled Diagram drawio (1)" src="https://github.com/user-attachments/assets/f7c3df82-23dc-4148-ac4b-8be3f1b4390d" />
+<img width="1172" height="1352" alt="daigram drawio" src="https://github.com/user-attachments/assets/e03798e0-9f9e-4f1a-936f-7ef5747df50a" />
+
 
 ---
 
