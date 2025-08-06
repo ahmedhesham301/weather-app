@@ -50,7 +50,7 @@ pipeline {
                         ansiblePlaybook(
                             credentialsId: 'aws-ssh-key',
                             inventory: 'ansible/inventory.py',
-                            playbook: 'ansible/playbook.yaml',
+                            playbook: 'ansible/webservers.yaml',
                             extraVars: [
                                 dockerhub_psw: "$DOCKERHUB_PSW",
                                 open_weather_api_key: "$open_weather_api_key"
