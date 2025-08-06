@@ -22,7 +22,7 @@ resource "aws_instance" "bastion" {
   tags = {
     "Name" = "bastion"
   }
-  key_name = "jenkins-key"
+  key_name  = "jenkins-key"
   user_data = <<-EOF
               #!/bin/bash
               yum update -y
