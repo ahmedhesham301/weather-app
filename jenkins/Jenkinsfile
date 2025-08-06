@@ -32,8 +32,8 @@ pipeline {
                 ]){
                     sh'''
                         terraform -chdir=./terraform init
-                        terraform -chdir=./terraform apply -auto-approve   
-                        terraform -chdir=./terraform output -json > ansible/ips.json
+                        terraform -chdir=./terraform apply -auto-approve
+                        terraform -chdir=./terraform output -json > terraform/output.json
                     '''
                 }
             }
