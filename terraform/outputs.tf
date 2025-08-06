@@ -1,9 +1,10 @@
-output "private_ips" {
-  value = { for i in aws_instance.webserver : i.tags["Name"] => i.private_ip }
+output "webservers" {
+  value = { "private_ips" : { for i in aws_instance.webserver : i.tags["Name"] => i.private_ip } }
 }
 
-output "bastion_ip" {
-  value = aws_instance.bastion.public_ip
+
+output "bastion" {
+  value = { "public_ip" : { "bastion" = aws_instance.bastion.public_ip } }
 }
 
 output "lb_ip" {

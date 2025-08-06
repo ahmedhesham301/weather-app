@@ -2,7 +2,7 @@
 import json
 import sys
 
-with open("ansible/ips.json") as f:
+with open("terraform/output.json") as f:
     hosts = json.load(f)
 
 hosts_dict = {
@@ -17,10 +17,10 @@ hosts_dict = {
         {
            "children": 
             [
-                "servers"
+                "webservers"
             ]
         },
-        "servers": 
+        "webservers": 
         {
             "hosts":
             [
@@ -30,9 +30,15 @@ hosts_dict = {
         
 }
 
-for name,ip in hosts.items():
-    hosts_dict["_meta"]["hostvars"][name] = {"ansible_host": ip}
-    hosts_dict["servers"]["hosts"].append(name)
+bastion_ip = hosts["bastion"]["value"]["public_ip"]["bastion"]
+for name,ip in hosts["webservers"]["value"]["private_ips"].items():
+    hosts_dict["_meta"]["hostvars"][name] = {
+        "ansible_user": "ec2-user",
+        "ansible_host": ip,
+        "ansible_ssh_private_key_file": "jenkins-key.pem",
+        "ansible_ssh_common_args": f"-o 'ProxyCommand=ssh -o StrictHostKeyChecking=no -i jenkins-key.pem -W \"%h:%p\" -q ec2-user@{bastion_ip}'",
+    }
+    hosts_dict["webservers"]["hosts"].append(name)
 
 
 if len(sys.argv) == 2 and sys.argv[1] == "--list":
