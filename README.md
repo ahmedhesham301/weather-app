@@ -101,7 +101,6 @@ weather-app/
 ├── docker/             # Dockerfile
 ├── jenkins/            # Jenkins pipeline
 ├── terraform/          # Terraform configs for AWS
-├── requirements.txt    # Python dependencies
 └── README.md           # This file
 ```
 
